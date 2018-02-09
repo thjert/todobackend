@@ -21,7 +21,7 @@ class TestCreateTodoItem(APITestCase):
     self.response = createItem(self.client)
 
   def test_received_201_created_status_code(self):
-    self.assertEqual(self.response.status.code, status.HTTP_201_CREATED)
+    self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
 
   def test_received_location_header_hyperlink(self):
     self.assertRegexpMatches(self.response['Location'], '^http://.+/todos/[\d]+$')
@@ -46,7 +46,7 @@ class TestUpdateTodoItem(APITestCase):
     self.response = self.client.put(url, data, format='json')
 
   def test_received_200_created_status_code(self):
-    self.assertEqual(self.response.status.code, status.HTTP_200_OK)
+    self.assertEqual(self.response.status_code, status.HTTP_200_OK)
 
   def test_item_was_updated(self):
     self.assertEqual(TodoItem.objects.get().completed, True)
@@ -59,13 +59,13 @@ class TestPatchTodoItem(APITestCase):
 
   def setUp(self):
     response = createItem(self.client)
-    self.assertEqual(TodoItem.objects.get().completed, True)
+    self.assertEqual(TodoItem.objects.get().completed, False)
     url = response['Location']
     data = {'title': 'Walk the dog', 'completed': True }
     self.response = self.client.patch(url, data, format='json')
 
   def test_received_200_ok_status_code(self):
-    self.assertEqual(self.response.status.code, status.HTTP_200_OK)
+    self.assertEqual(self.response.status_code, status.HTTP_200_OK)
 
   def test_item_was_updated(self):
     self.assertEqual(TodoItem.objects.get().completed, True)
@@ -83,7 +83,7 @@ class TestDeleteTodoItem(APITestCase):
     self.response = self.client.delete(url)
 
   def test_received_204_no_content_code(self):
-    self.assertEqual(self.response.status.code, status.HTTP_204_NO_CONTENT)
+    self.assertEqual(self.response.status_code, status.HTTP_204_NO_CONTENT)
 
   def test_item_was_deleted(self):
     self.assertEqual(TodoItem.objects.count(), 0)
@@ -100,7 +100,7 @@ class TestDeleteAllItems(APITestCase):
     self.response = self.client.delete(reverse('todoitem-list'))
 
   def test_received_204_no_content_code(self):
-    self.assertEqual(self.response.status.code, status.HTTP_204_NO_CONTENT)
+    self.assertEqual(self.response.status_code, status.HTTP_204_NO_CONTENT)
 
   def test_all_items_were_deleted(self):
     self.assertEqual(TodoItem.objects.count(), 0)
