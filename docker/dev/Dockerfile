@@ -12,7 +12,7 @@ RUN . /appenv/bin/activate && \
 
 # PIP environment variables (NOTE: must be set after installing wheel)
 
-ENV WHEELHOUSE=/wheelhouse PIP_WHEEL_DIR=/wheelhouse PIP_FINS_LINKS=/wheelhouse XDG_CACHE_HOME=/cache
+ENV WHEELHOUSE=/wheelhouse PIP_WHEEL_DIR=/wheelhouse PIP_FIND_LINKS=/wheelhouse XDG_CACHE_HOME=/cache
 
 
 VOLUME /wheelhouse
@@ -21,6 +21,7 @@ VOLUME /wheelhouse
 
 VOLUME /build
 
+# OUTPUT: Test reports are output here
 VOLUME /reports
 
 COPY scripts/test.sh /usr/local/bin/test.sh
