@@ -10,7 +10,7 @@ setup (
   install_requires	= 	["Django>=1.9",
 				"django-cors-headers>=1.1.0",
 				"djangorestframework>=3.3.0",
-				"MySQL-python>=1.2.5"]
+				"MySQL-python>=1.2.5"],
   extras_require	= {
 				"test": [
 				"colorama>=0.3.9",
@@ -19,5 +19,5 @@ setup (
 				"nose>=1.3.7",
 				"pinocchio>=0.4.2"
 				]
-			}
+			  }
 )
