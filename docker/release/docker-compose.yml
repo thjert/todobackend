@@ -3,13 +3,13 @@ app:
   dockerfile: docker/release/Dockerfile
   links:
     - db
+  volumes_from:
+    - webroot
   environment:
     DJANGO_SETTINGS_MODULE: todobackend.settings.release
     MYSQL_HOST: db
     MYSQL_USER: todo
     MYSQL_PASSWORD: password
-  volumes_from:
-    - webroot
   command:
     - uwsgi
     - "--socket /var/www/todobackend/todobackend.sock"
@@ -29,14 +29,11 @@ test:
   command: --reporter mocha-jenkins-reporter
 
 nginx:
-  build: .
-  dockerfile: Dockerfile.nginx
-  links:
-    - app
+  image: nginx
+  volumes:
+    - ./todobackend.conf:/etc/nginx/conf.d/todobackend.conf
   ports:
     - "8000:8000"
-  volumes_from:
-    - webroot
 
 webroot:
   build: ../../
