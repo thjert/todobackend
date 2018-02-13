@@ -17,6 +17,10 @@ ENV WHEELHOUSE=/wheelhouse PIP_WHEEL_DIR=/wheelhouse PIP_FINS_LINKS=/wheelhouse 
 
 VOLUME /wheelhouse
 
+# OUTPUT: Build cache
+
+VOLUME /build
+
 VOLUME /reports
 
 COPY scripts/test.sh /usr/local/bin/test.sh

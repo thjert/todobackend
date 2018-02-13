@@ -2,7 +2,12 @@
 
 . /appenv/bin/activate
 
-pip install -r requirements_test.txt
+
+# Download requirements to build cache
+
+pip download -d /build -r requirements_test.txt --no-input
+
+pip install --no-index -f /build -r requirements_test.txt
 
 
 exec "$@"
