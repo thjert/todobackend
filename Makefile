@@ -1,6 +1,6 @@
 # Project variables
 PROJECT_NAME ?= todobackend
-ORG_NAME ?= jmenga
+ORG_NAME ?= thjert
 REPO_NAME ?= todobackend
 
 # Filenames
@@ -89,7 +89,7 @@ clean:
 	${INFO} "Destroying release environment..."
 	@ docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) kill
 	@ docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) rm -f -v
-	${INFO} "Removing dangling images..."
+	${INFO} "Removing dangling images & volumes ..."
 	@ docker images -q -f dangling=true -f label=application=$(REPO_NAME) | xargs -I ARGS docker rmi -f ARGS
 	${INFO} "Clean complete"
 

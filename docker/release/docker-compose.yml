@@ -20,7 +20,7 @@ app:
     - "--die-on-term"
 
 test:
-  image: jmenga/todobackend-specs
+  image: thjert/todobackend-specs
   links:
     - nginx
   environment:
@@ -58,7 +58,7 @@ db:
     MYSQL_ROOT_PASSWORD: password
 
 agent:
-  image: jmenga/ansible
+  image: thjert/ansible
   volumes:
     - ../../ansible/probe.yml:/ansible/probe.yml
   links:
