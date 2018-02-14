@@ -1,4 +1,1 @@
-/*
-** Genom att ange "." i stället för det som krävs kommer informationen att hämtas ur setup.py
-*/
 .

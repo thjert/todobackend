@@ -1,5 +1,5 @@
 FROM jmenga/todobackend-base:latest
-MAINTAINER Thomas Hjert <thomas.hjert@knowit.se>
+MAINTAINER Justin Menga <justin.menga@gmail.com>
 
 # Install dev/build dependencies
 RUN apt-get update && \

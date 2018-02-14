@@ -22,7 +22,6 @@ DATABASES = {
         'HOST': os.environ.get('MYSQL_HOST','localhost'),
         'PORT': os.environ.get('MYSQL_PORT','3306'),
     }
-
 }
 
 STATIC_ROOT = os.environ.get('STATIC_ROOT', '/var/www/todobackend/static')
