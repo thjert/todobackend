@@ -12,9 +12,9 @@ app:
     MYSQL_PASSWORD: password
   command:
     - uwsgi
-    - "--socket /var/www/todobackend/todobackend.sock"
+    - "--socket=/var/www/todobackend/todobackend.sock"
     - "--chmod-socket=666"
-    - "--module todobackend.wsgi"
+    - "--module=todobackend.wsgi"
     - "--master"
     - "--die-on-term"
 
