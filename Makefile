@@ -60,7 +60,7 @@ build:
 	@ docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) up builder
 	${CHECK} $(DEV_PROJECT) $(DEV_COMPOSE_FILE) builder
 	${INFO} "Copying application artifacts..."
-	docker cp $$(docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) ps -q builder):/wheelhouse/. target
+	@ docker cp $$(docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) ps -q builder):/wheelhouse/. target
 	${INFO} "Build complete"
 
 release:
