@@ -1,61 +1,36 @@
 version: '2'
 
 volumes:
-  webroot:
+  build:
     driver: local
+  cache:
+    external: true
 
 services:
-  app:
+  test:
     build: 
       context: ../../
-      dockerfile: docker/release/Dockerfile
+      dockerfile: docker/dev/Dockerfile  
+    volumes:
+      - cache:/cache
+      - build:/build
     links:
       - db
     environment:
-      DJANGO_SETTINGS_MODULE: todobackend.settings.release
+      DJANGO_SETTINGS_MODULE: todobackend.settings.test
       MYSQL_HOST: db
-      MYSQL_USER: todo
+      MYSQL_USER: root
       MYSQL_PASSWORD: password
-    volumes:
-      - webroot:/var/www/todobackend
-    command:
-      - uwsgi
-      - "--socket /var/www/todobackend/todobackend.sock"
-      - "--chmod-socket=666"
-      - "--module todobackend.wsgi"
-      - "--master"
-      - "--die-on-term"
+      TEST_OUTPUT_DIR: /reports
 
-  test:
-    image: jmenga/todobackend-specs
-    links:
-      - nginx
-    environment:
-      URL: http://nginx:8000/todos
-      JUNIT_REPORT_PATH: /reports/acceptance.xml
-      JUNIT_REPORT_STACK: 1
-    command: --reporter mocha-jenkins-reporter
-
-  nginx:
+  builder:
     build: 
-      context: .
-      dockerfile: Dockerfile.nginx
-    links:
-      - app
-    ports:
-      - "8000:8000"
+      context: ../../
+      dockerfile: docker/dev/Dockerfile
     volumes:
-      - webroot:/var/www/todobackend
-
-  db:
-    image: mysql:5.6
-    expose:
-      - "3306"
-    environment:
-      MYSQL_DATABASE: todobackend
-      MYSQL_USER: todo
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      - build:/build
+    entrypoint: "entrypoint.sh"
+    command: ["pip", "wheel", "--no-index", "-f /build", "."]
 
   agent:
     image: jmenga/ansible
@@ -65,3 +40,11 @@ services:
       PROBE_HOST: "db"
       PROBE_PORT: "3306"
     command: ["probe.yml"]
+
+  db: 
+    image: mysql:5.6
+    hostname: db
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
