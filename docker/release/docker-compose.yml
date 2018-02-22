@@ -57,7 +57,7 @@ db:
     MYSQL_ROOT_PASSWORD: password
 
 agent:
-  image: thjert/ansible:latest
+  image: thjert/ansible
   links:
     - db
   environment:
