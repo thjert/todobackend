@@ -62,7 +62,7 @@ test:
 ###	${INFO} "Pulling latest images..."
 ###	@ docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) pull
         
-${INFO} "Creating cache volume..."
+	${INFO} "Creating cache volume..."
 	@ docker volume create --name cache
 ###	@ docker volume create --name build
 	${INFO} "Pulling latest images..."
