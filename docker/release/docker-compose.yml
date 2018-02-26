@@ -8,14 +8,13 @@ app:
     MYSQL_HOST: db
     MYSQL_USER: todo
     MYSQL_PASSWORD: password
-    DEBUG: "true"
   volumes_from:
     - webroot
   command:
     - uwsgi
-    - "--socket=/var/www/todobackend/todobackend.sock"
+    - "--socket /var/www/todobackend/todobackend.sock"
     - "--chmod-socket=666"
-    - "--module=todobackend.wsgi"
+    - "--module todobackend.wsgi"
     - "--master"
     - "--die-on-term"
 

@@ -2,7 +2,6 @@ from base import *
 import os
 
 # Disable debug
-
 if os.environ.get('DEBUG'):
   DEBUG = True
 else:
@@ -12,7 +11,6 @@ else:
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS', '*')]
 
 # Database settings
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 
 setup (
   name                 = "todobackend",
-  version              = "0.1.0",
+  version              = "0.1.1",
   description          = "Todobackend Django REST service",
   packages             = find_packages(),
   include_package_data = True,
   scripts              = ["manage.py"],
-  install_requires     = ["Django>=1.9",
+  install_requires     = ["Django>=1.9,<2.0",
                           "django-cors-headers>=1.1.0",
                           "djangorestframework>=3.3.1",
                           "MySQL-python>=1.2.5",
