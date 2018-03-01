@@ -1,5 +1,10 @@
-FROM nginx
+FROM thjert/todobackend-base:latest
 MAINTAINER Justin Menga <justin.menga@gmail.com>
- 
-# Copy todobackend nginx configuration file
-COPY todobackend.conf /etc/nginx/conf.d/todobackend.conf
+
+# Copy application artifacts
+COPY target /wheelhouse
+
+# Install application
+RUN . /appenv/bin/activate && \
+    pip install --no-index -f /wheelhouse todobackend && \
+    rm -rf /wheelhouse
