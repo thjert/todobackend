@@ -43,7 +43,7 @@ services:
     links:
       - app
     ports:
-      - "8088:8000"
+      - "8000:8000"
     volumes:
       - webroot:/var/www/todobackend
 
