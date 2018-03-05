@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup (
   name                 = "todobackend",
-  version              = "0.1.1",
+  version              = "0.1.2",
   description          = "Todobackend Django REST service",
   packages             = find_packages(),
   include_package_data = True,
